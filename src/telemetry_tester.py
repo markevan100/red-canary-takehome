@@ -6,8 +6,10 @@ def main():
     print("Welcome to Modak's EDR Telemetry Test Program")
     
     while True:
+        print("What action would you like to test?")
         print("\nAvailable actions: process_start (ps), file_action (fa), network_connect (nc), exit")
-        action = input("What action would you like to test? ").strip().lower()
+        action = input().strip().lower()
+
 
         if action in ["ps", "process_start"]:
             print("Process start selected.")
