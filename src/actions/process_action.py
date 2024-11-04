@@ -1,7 +1,7 @@
 import subprocess
-import getpass
 import os
 import signal
+from logger import log_activity
 
 def handle_process_action():
     print("Enter the command to start the process.")
@@ -11,13 +11,18 @@ def handle_process_action():
     try:
         process = subprocess.Popen(command, shell=True)
         pid = process.pid
-        username = getpass.getuser()
-        print(f"\033[92mProcess started with command: {command}, PID: {pid}, User: {username}\033[0m")
+        process_name = command.split()[0]
 
-        process.poll()
-        if process.returncode is None:
+        print(f"Process started with command: {command}, PID: {pid}")
+        
+        log_activity("process_start", {
+            "command": command,
+            "process_id": pid,
+            "process_name": process_name,
+        })
+
+        if process.poll() is None:
             os.kill(pid, signal.SIGTERM)
-            print(f"Process with PID {pid} was terminated.")
 
     except Exception as e:
         print(f"Failed to start process: {e}")

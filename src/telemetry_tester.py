@@ -8,7 +8,7 @@ def main():
     while True:
         print("What action would you like to test?")
         print("\nAvailable actions: process_start (ps), file_action (fa), network_connect (nc), exit")
-        action = input().strip().lower()
+        action = input("Action: ").strip().lower()
 
 
         if action in ["ps", "process_start"]:
