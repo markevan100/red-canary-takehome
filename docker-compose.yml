@@ -1,0 +1,16 @@
+services:
+  telemetry_app:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+    command: python3 telemetry_tester.py
+
+  telemetry_tests:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    command: python3 -m unittest discover tests
