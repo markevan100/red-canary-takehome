@@ -1,4 +1,5 @@
 __pycache__/
 *.pyc
 *.json
-user_created_files/ 
+user_created_files/
+activity_logs/
