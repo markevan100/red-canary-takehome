@@ -12,7 +12,11 @@ class TestFileAction(unittest.TestCase):
             "file_create",
             {
                 "filepath": "user_created_files/testfile.txt",
-                "file_type": ".txt"
+                "file_type": ".txt",
+                "process_name": unittest.mock.ANY,
+                "process_id": unittest.mock.ANY,
+                "command_line": unittest.mock.ANY,
+                "content_appended": "N/A"
             }
         )
 
@@ -25,6 +29,10 @@ class TestFileAction(unittest.TestCase):
             "file_modify",
             {
                 "filepath": "user_created_files/testfile.txt",
+                "file_type": "N/A",
+                "process_name": unittest.mock.ANY,
+                "process_id": unittest.mock.ANY,
+                "command_line": unittest.mock.ANY,
                 "content_appended": "appended content"
             }
         )
@@ -38,7 +46,14 @@ class TestFileAction(unittest.TestCase):
             mock_remove.assert_called_once_with("user_created_files/testfile.txt")
             mock_log_activity.assert_called_once_with(
                 "file_delete",
-                {"filepath": "user_created_files/testfile.txt"}
+                {
+                    "filepath": "user_created_files/testfile.txt",
+                    "file_type": "N/A",
+                    "process_name": unittest.mock.ANY,
+                    "process_id": unittest.mock.ANY,
+                    "command_line": unittest.mock.ANY,
+                    "content_appended": "N/A"
+                }
             )
 
 if __name__ == '__main__':

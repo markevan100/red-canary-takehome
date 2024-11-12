@@ -11,6 +11,8 @@ For cross system testing, I tested locally on my Mac and created a Docker setup 
 
 I opted for a prompt-based system with the intention of making the program as user friendly as possible. When the user starts the program, it will ask them which action they would like to test. Based on their selection, there are follow-up questions. Once that action has been completed, the user is returned to the 'main menu' and can test another action. For now, the logging is done for each User Session into its own, timestamped activity log file. So, for now, each user session will generate its own file, but it would be simple to change that to build a running file for all of the logging. For the purpose of this project, having separate files facilitated manual testing.
 
+For a video demo of the project, you can visit this link: https://www.loom.com/share/d2332a6b263b476a81b898ac0e2ed426?sid=77c6da4d-7221-4e25-8119-5bea58c41086
+
 ### Features
 There are three different types of actions, and some actions provide further options. 
 

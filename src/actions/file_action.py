@@ -1,4 +1,5 @@
 import os
+import sys
 from logger import log_activity
 
 USER_FILES_DIR = "user_created_files"
@@ -22,6 +23,20 @@ def handle_file_action():
     else:
         print("Invalid action. Please choose a valid option.")
 
+def log_file_activity(action, filepath, file_type="N/A", content_appended="N/A"):
+    process_name = os.path.basename(sys.argv[0]).lower()
+    process_id = os.getpid()
+    command_line = ' '.join(sys.argv)
+
+    log_activity(action, {
+        "filepath": filepath,
+        "file_type": file_type if file_type else "N/A",
+        "process_name": process_name,
+        "process_id": process_id,
+        "command_line": command_line,
+        "content_appended": content_appended if content_appended else "N/A"
+    })
+
 def create_file():
     ensure_user_files_dir()
     filename = input("Enter the name of the file to create: ").strip()
@@ -34,7 +49,7 @@ def create_file():
     with open(file_path, 'w') as f:
         f.write("")
 
-    log_activity("file_create", {"filepath": file_path, "file_type": file_type})
+    log_file_activity("file_create", file_path, file_type)
     print(f"File '{full_filename}' created successfully.")
 
 def modify_file():
@@ -58,7 +73,7 @@ def modify_file():
     with open(file_path, 'a') as f:
         f.write(content + "\n")
 
-    log_activity("file_modify", {"filepath": file_path, "content_appended": content})
+    log_file_activity("file_modify", file_path, content_appended=content)
     print(f"File '{filename}' modified successfully.")
 
 def delete_file():
@@ -79,5 +94,5 @@ def delete_file():
     file_path = os.path.join(USER_FILES_DIR, filename)
     os.remove(file_path)
 
-    log_activity("file_delete", {"filepath": file_path})
+    log_file_activity("file_delete", file_path)
     print(f"File '{filename}' deleted successfully.")
